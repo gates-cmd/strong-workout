@@ -1,0 +1,65 @@
+<div class="container fade-in">
+  <h2>{{ pageTitle }}</h2>
+  
+  <div class="card form-section">
+    <label>Seleziona Esercizio:</label>
+    <select class="input-field" [(ngModel)]="selectedExerciseName" (change)="onSelectChange($event)">
+      <option value="" disabled selected>Scegli</option>
+      @for (name of availableExercises; track name) {
+        <option [value]="name">{{ name }}</option>
+      }
+      <option value="ALTRO">ALTRO</option>
+    </select>
+
+    @if (isCustomExercise) {
+      <div class="fade-in">
+        <label>Nome Nuovo Esercizio:</label>
+        <input type="text" [(ngModel)]="customExerciseName" class="input-field" placeholder="Es. Burpees">
+      </div>
+    }
+
+    <div class="row">
+      <div class="col">
+        <label>Serie</label>
+        <input type="number" [(ngModel)]="sets" class="input-field">
+      </div>
+      <div class="col">
+        <label>Reps</label>
+        <input type="number" [(ngModel)]="reps" class="input-field">
+      </div>
+      <div class="col">
+        <label>Peso (Kg)</label>
+        <input type="number" [(ngModel)]="weight" class="input-field">
+      </div>
+    </div>
+
+    <button (click)="addExercise()" id="btn-add" class="btn btn-primary" 
+        [disabled]="(!isCustomExercise && !selectedExerciseName) 
+        || (isCustomExercise && !customExerciseName)">
+      + Aggiungi
+    </button>
+  </div>
+
+  @if (currentSessionExercises.length > 0) {
+    <div class="preview-section fade-in">
+      <h3>Riepilogo</h3>
+      <ul class="exercise-list">
+        @for (item of currentSessionExercises; track $index) {
+          <li>
+            <span>
+              <strong>{{ item.exerciseName }}</strong>: {{ item.sets }}x{{ item.reps }} @ {{ item.weightKg }}kg
+            </span>
+                        
+            <div class="action-buttons">
+              <button (click)="removeExercise($index)" class="btn-icon delete" title="Rimuovi">✕</button>
+            </div>
+          </li>
+        }
+      </ul>
+
+      <button (click)="saveSession()" class="btn btn-success full-width">
+        {{ editingId ? '💾 Aggiorna Allenamento' : '💾 Salva Allenamento' }}
+      </button>
+    </div>
+  }
+</div>

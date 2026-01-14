@@ -1,0 +1,26 @@
+<nav class="navbar">
+  <div class="nav-content">
+    <h1 class="logo">GymApp<span>.</span></h1>
+    
+    <div class="nav-links">
+      <a routerLink="/" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{exact: true}">
+        Storico
+      </a>
+
+      <a routerLink="/new-session" 
+        routerLinkActive="active">
+        Nuovo
+      </a>
+
+      <a routerLink="/progress-bars" 
+        routerLinkActive="active"
+        class="graph">
+        <img class="graph-icon">
+      </a>
+    </div> 
+  </div>
+</nav>
+
+<router-outlet></router-outlet>

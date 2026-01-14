@@ -1,0 +1,40 @@
+<div class="container fade-in">
+  <h2>📈 Analisi Dettagliata</h2>
+
+  <div class="card mb-4">
+    <label>Seleziona Esercizio:</label>
+    <select [(ngModel)]="selectedExercise" (change)="updateChart()" class="input-field">
+      <option value="" disabled selected>Scegli Esercizio</option>
+      @for (name of availableExercises; track name) {
+        <option [value]="name">{{ name }}</option>
+      }
+    </select>
+  </div>
+
+  @if (selectedExercise && weightChartData.datasets.length > 0 && weightChartData.datasets[0].data.length > 0) {
+    
+    <div class="card chart-card fade-in">
+      <h3>Peso - Kg</h3>
+      <div class="chart-container">
+        <canvas baseChart [data]="weightChartData" [options]="commonOptions" [type]="'line'"></canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card fade-in">
+      <h3>Reps</h3>
+      <div class="chart-container">
+        <canvas baseChart [data]="repsChartData" [options]="commonOptions" [type]="'line'"></canvas>
+      </div>
+    </div>
+
+    <div class="card chart-card fade-in" id="chart-serie">
+      <h3>Serie</h3>
+      <div class="chart-container">
+        <canvas baseChart [data]="setsChartData" [options]="commonOptions" [type]="'line'"></canvas>
+      </div>
+    </div>
+
+  } @else if (selectedExercise) {
+    <p class="empty-msg">Nessun dato trovato per questo esercizio.</p>
+  }
+</div>

@@ -1,0 +1,25 @@
+.custom-dialog { 
+    padding: 10px; 
+    font-family: sans-serif; 
+}
+
+h2 {
+    color: #FD3DB5;
+    margin: 0;
+}
+
+.btn-confirm { 
+    background-color: #FD3DB5; 
+    color: white; 
+    border-radius: 5px;
+    border: none;
+    margin-left: 8px;
+}
+
+.btn-back { 
+    background-color: #ef4444; 
+    color: white; 
+    border-radius: 5px;
+    border: none;
+    margin-left: 8px;
+}

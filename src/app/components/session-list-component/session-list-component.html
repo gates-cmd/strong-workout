@@ -1,0 +1,45 @@
+<div class="container fade-in">
+  <h2>📅 Storico Allenamenti</h2>
+  
+  <div class="filter-box">
+    <label>Filtra per esercizio:</label>
+    <select [(ngModel)]="filterExercise" class="input-field">
+      <option value="">Vedi tutto</option>
+      @for (name of availableExercises; track name) {
+        <option [value]="name">{{ name }}</option>
+      }
+    </select>
+  </div>
+
+  <div class="sessions-grid">
+    @for (session of filteredSessions; track session.id) {
+      
+      <div class="card session-card">
+        <div class="card-header">
+          <span class="date-badge">{{ session.date | date:'dd/MM/yyyy HH:mm' }}</span>
+          
+          <div class="actions">
+            <button class="btn-icon edit" (click)="editSession(session.id)" title="Modifica">✏️</button>
+            <button class="btn-icon delete" (click)="deleteSession(session.id)" title="Elimina">❌</button>
+          </div>
+        </div>
+        
+        <ul class="exercise-list">
+          @for (ex of session.exercises; track $index) {
+            @if (filterExercise === '' || ex.exerciseName === filterExercise) {
+              <li [class.highlight]="filterExercise !== ''">
+                <strong>{{ ex.exerciseName }}</strong>
+                <span class="details">{{ ex.sets }} serie x {{ ex.reps }} reps - {{ ex.weightKg }}kg</span>
+              </li>
+            }
+          }
+        </ul>
+      </div>
+
+    } @empty {
+      <div class="empty-state fade-in">
+        <p>Nessun esercizio salvato</p>
+      </div>
+    }
+  </div>
+</div>

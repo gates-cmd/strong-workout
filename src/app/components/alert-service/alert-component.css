@@ -1,0 +1,16 @@
+.custom-dialog {
+    padding: 10px;
+    font-family: 'Inter', sans-serif;
+}
+
+h2 {
+    color: #FD3DB5;
+    margin: 0;
+}
+
+.btn-ok {
+    background-color: #FD3DB5;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
